@@ -4,7 +4,13 @@ class ContactController extends controller {
 
    function runBeforeAction(){
       if($_SESSION['has_submitted_the_form'] ?? 0 == 1){
-         include 'view/contact/thank-you-temp/already-submitted-page.html';
+
+         $variables['title'] = 'Already Sumitted the page';
+         $variables['content'] = 'We will conatct you soon';
+   
+         $template = new Template('default');
+         $template->view('static-page', $variables);
+
          return false;
       }
       return true;
@@ -13,7 +19,11 @@ class ContactController extends controller {
    function defaultAction(){
       // var_dump($_SESSION);
 
-      include "view/contact/contact-us.html";
+      $variables['title'] = 'Contact page title';
+      $variables['content'] = 'Welcome to our Contact Page';
+
+      $template = new Template('default');
+      $template->view('contact/contact-us', $variables);
    }
 
    function submitContactAction(){
@@ -24,7 +34,12 @@ class ContactController extends controller {
 
       $_SESSION['has_submitted_the_form'] = 1;
 
-      include 'view/contact/thank-you-temp/contact-us-thank-you.html';
+      $variables['title'] = 'Thank you for contacting us';
+      $variables['content'] = 'We will conatct you soon';
+
+      $template = new Template('default');
+      $template->view('static-page', $variables);
+
    }
 
 }

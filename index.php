@@ -1,13 +1,18 @@
 <?php
 session_start();
-require_once 'src/controller.php';
+
+define('ROOT_PATH', dirname(__FILE__) . DIRECTORY_SEPARATOR);
+define('VIEW_PATH', ROOT_PATH . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR);
+
+require_once ROOT_PATH.'src/controller.php';
+require_once ROOT_PATH.'src/template.php';
 
 $section = $_GET['section'] ?? $_POST['section'] ?? 'home';
 $action = $_GET['action'] ?? $_POST['action'] ?? 'default';
 
 if($section == 'about-us'){
 
-  include 'controller/abotUsPage.php';
+  include ROOT_PATH.'controller/abotUsPage.php';
 
   $aboutController = new AboutUsController();
 
@@ -15,7 +20,7 @@ if($section == 'about-us'){
 
 }else if($section == 'contact'){
 
-  include 'controller/contactUsPage.php';
+  include ROOT_PATH.'controller/contactUsPage.php';
   $contactController = new ContactController();
 
   // make dynamic and call functions from class
@@ -29,7 +34,11 @@ if($section == 'about-us'){
 
 }else{
 
-  include 'controller/homePage.php';
+  include ROOT_PATH.'controller/homePage.php';
+
+  $homeController = new HomePageController();
+
+  $homeController->runAction($action);
 
 }
    
