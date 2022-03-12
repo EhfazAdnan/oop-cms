@@ -2,8 +2,13 @@
 
 class AboutUsController extends controller {
    function defaultAction(){
-      $variables['title'] = 'About Us Page';
-      $variables['content'] = 'About Us content of the page';
+
+      $dbh = DatabaseConnection::getInstance();
+      $dbc = $dbh->getConnection();
+
+      $pageObj = new Page($dbc);
+      $pageObj->findById(2);
+      $variables['pageObj'] = $pageObj;
 
       $template = new Template('default');
       $template->view('static-page', $variables);

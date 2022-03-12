@@ -6,6 +6,11 @@ define('VIEW_PATH', ROOT_PATH . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARAT
 
 require_once ROOT_PATH.'src/controller.php';
 require_once ROOT_PATH.'src/template.php';
+require_once ROOT_PATH.'src/DatabaseConnection.php';
+require_once ROOT_PATH.'model/Page.php';
+
+// db connection
+DatabaseConnection::connect('localhost','oop-cms','root','');
 
 $section = $_GET['section'] ?? $_POST['section'] ?? 'home';
 $action = $_GET['action'] ?? $_POST['action'] ?? 'default';
